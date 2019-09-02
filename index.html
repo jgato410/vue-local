@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <hr>
+            <h1>{{ message }}</h1>
+            <p>{{ getFullName() }}</p>
+            <p>{{ writeFullname(firstName, lastName) }}</p>
+            <p>{{ writeFullname(this.firstName, this.lastName) }}</p>
+            <p>{{ theThisKeywordES6() }}</p>
+            <a v-bind:href='blogUrl' >Visit my blog</a>
+        <hr>
+            <p>Title: {{  title }}</p>
+            <p>Released: {{  released }}</p>
+            <p>The movie is {{ age(released) }}</p>
+            <div v-bind:title='title'>Hover your moouse here!</div>
+        <hr>
+            <button v-on:click="alertMessage('Hello there!!', $event)" >Click here!</button>
+        <hr>
+            <div v-on:click="showDialog">
+                <button v-on:click="showDialog">Click Here!!</button>
+            </div>
+            <a href="https://google.com" v-on:click.prevent="showDialog" target="_blank">Click here</a>
+        <hr>
+            <input type="text" v-on:keyup.enter="pressedEnter">
+
+    </div>
+    
+    <script src="vue.js"></script>
+
+    <script type="text/javascript">
+        new Vue({
+            el: '#app',
+            data(){
+                return {
+                    message: 'Hello world!',
+                    firstName: 'Joshua',
+                    lastName: 'Gato',
+                    blogUrl: "https://jgato410.github.io",
+                    title: "The Matrix",
+                    released: 1999
+                }
+            },
+            methods: {
+                getFullName() {
+                    return this.firstName + ' ' + this.lastName;
+                },
+                writeFullname(first, last) {
+                    return first + ' ' + last;
+                },
+                theThisKeyword: function() {
+                    console.log(this);
+                },
+                theThisKeywordES6: () => {
+                    console.log(this);
+                },
+                age(released) {
+                    return released > 2000 ? "new" : "old";
+                },
+                alertMessage(message, event) {
+                    alert(message);
+                    console.log(event);
+                },
+                showDialog: function() {
+                    alert("Hello World!!");
+                },
+                pressedEnter: function() {
+                    alert("You pressed the eneter key!!");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
